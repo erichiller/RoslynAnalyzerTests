@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libs", "Libs\Libs.csproj", "{16F94791-32DB-42C4-B89D-7DAE8D2C0F71}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoslynAnalyzerTests", "RoslynAnalyzerTests\RoslynAnalyzerTests.csproj", "{45717629-C224-471B-B49A-67270064BA98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainLibs", "MainLibs\MainLibs.csproj", "{D7E0DA71-13A4-4E21-A6BF-1BE7EBDA2FC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{16F94791-32DB-42C4-B89D-7DAE8D2C0F71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16F94791-32DB-42C4-B89D-7DAE8D2C0F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16F94791-32DB-42C4-B89D-7DAE8D2C0F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16F94791-32DB-42C4-B89D-7DAE8D2C0F71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45717629-C224-471B-B49A-67270064BA98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45717629-C224-471B-B49A-67270064BA98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45717629-C224-471B-B49A-67270064BA98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45717629-C224-471B-B49A-67270064BA98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7E0DA71-13A4-4E21-A6BF-1BE7EBDA2FC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7E0DA71-13A4-4E21-A6BF-1BE7EBDA2FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7E0DA71-13A4-4E21-A6BF-1BE7EBDA2FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7E0DA71-13A4-4E21-A6BF-1BE7EBDA2FC5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

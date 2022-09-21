@@ -1,0 +1,55 @@
+root = true
+# top-most EditorConfig file
+
+
+#######################################################
+# SEVERITY LEVELS
+#######################################################
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/configuration-options
+# 
+# Severity	  Build-time behavior
+# --------    -------------------
+# error       Violations appear as build errors and cause builds to fail.
+# warning     Violations appear as build warnings but do not cause builds to fail (unless you have an option set to treat warnings as errors).
+# suggestion  Violations appear as build messages and as suggestions in the Visual Studio IDE.
+# silent      Violations aren't visible to the user.
+# none        Rule is suppressed completely.
+# default     The default severity of the rule is used.
+
+
+# style rules of the form xxx = <true|false>:<severity> are no longer supported
+# https://github.com/dotnet/roslyn/issues/44201
+
+# Code Analysis Categories
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/categories
+# 
+# All CA Rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/
+# 
+# Use
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/use-roslyn-analyzers
+
+#######################################################
+#### Analyzer Rules ####
+#######################################################
+# see
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/code-analysis-for-managed-code-warnings
+#######################################################
+
+[*.cs]
+
+indent_style = space
+indent_size = 4
+end_of_line = lf
+
+# insert_final_newline = true
+charset = utf-8
+
+# CA2213: Disposable fields should be disposed
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2213
+dotnet_diagnostic.ca2213.severity = warning
+# # dotnet_code_quality.interprocedural_analysis_kind = None
+# # dotnet_code_quality.interprocedural_analysis_kind = NonContextSensitive
+dotnet_code_quality.interprocedural_analysis_kind = ContextSensitive
+dotnet_code_quality.max_interprocedural_method_call_chain = 5
+dotnet_code_quality.max_interprocedural_lambda_or_local_function_call_chain = 5

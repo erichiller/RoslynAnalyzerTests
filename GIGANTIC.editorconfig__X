@@ -1,0 +1,2095 @@
+root = true
+# top-most EditorConfig file
+
+
+#######################################################
+# SEVERITY LEVELS
+#######################################################
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/configuration-options
+# 
+# Severity	  Build-time behavior
+# --------    -------------------
+# error       Violations appear as build errors and cause builds to fail.
+# warning     Violations appear as build warnings but do not cause builds to fail (unless you have an option set to treat warnings as errors).
+# suggestion  Violations appear as build messages and as suggestions in the Visual Studio IDE.
+# silent      Violations aren't visible to the user.
+# none        Rule is suppressed completely.
+# default     The default severity of the rule is used.
+
+
+# style rules of the form xxx = <true|false>:<severity> are no longer supported
+# https://github.com/dotnet/roslyn/issues/44201
+
+# Code Analysis Categories
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/categories
+# 
+# All CA Rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/
+# 
+# Use
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/use-roslyn-analyzers
+
+#######################################################
+#### Analyzer Rules ####
+#######################################################
+# see
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/code-analysis-for-managed-code-warnings
+#######################################################
+
+[*.cs]
+
+indent_style = space
+indent_size = 4
+end_of_line = lf
+
+# insert_final_newline = true
+charset = utf-8
+
+
+#######################################################
+# Code Style / Formatting Rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/formatting-rules
+#######################################################
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = true
+
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#dotnet-namespace-options
+dotnet_style_namespace_match_folder = false
+
+# csharp_new_line_before_open_brace = methods, properties, control_blocks, types
+csharp_new_line_before_open_brace = none
+csharp_new_line_before_else = false
+csharp_new_line_before_catch = false
+csharp_new_line_before_finally = false
+
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_between_query_expression_clauses = true
+
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+# flush_left || no_change
+csharp_indent_labels = one_less_than_current
+csharp_indent_block_contents = true
+csharp_indent_braces = false
+csharp_indent_case_contents_when_block = true
+
+csharp_space_after_cast = false
+csharp_space_after_keywords_in_control_flow_statements = true
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#csharp_space_between_parentheses
+csharp_space_between_parentheses = control_flow_statements, type_casts, expressions
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_after_colon_in_inheritance_clause = true
+csharp_space_around_binary_operators = before_and_after
+csharp_space_between_method_declaration_parameter_list_parentheses = true
+csharp_space_between_method_declaration_empty_parameter_list_parentheses = true
+csharp_space_between_method_declaration_name_and_open_parenthesis = false
+csharp_space_between_method_call_parameter_list_parentheses = true
+csharp_space_between_method_call_empty_parameter_list_parentheses = false
+csharp_space_between_method_call_name_and_opening_parenthesis = false
+csharp_space_after_comma = true
+csharp_space_before_comma = false
+csharp_space_after_dot = false
+csharp_space_before_dot = false
+csharp_space_after_semicolon_in_for_statement = true
+csharp_space_before_semicolon_in_for_statement = true
+
+## THIS for aligning declarations =>
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#csharp_space_around_declaration_statements
+csharp_space_around_declaration_statements = ignore
+
+csharp_space_before_open_square_brackets = false
+csharp_space_between_empty_square_brackets = false
+csharp_space_between_square_brackets = true
+
+csharp_preserve_single_line_statements = true
+csharp_preserve_single_line_blocks = true
+
+csharp_using_directive_placement = outside_namespace:warning
+
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#namespace-options
+csharp_style_namespace_declarations = file_scoped
+
+#######################################################
+# Naming Rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/naming-rules
+# should be ordered from MOST to LEAST specific
+# NOTE: JetBrains Rider supports more detailed naming settings
+# https://www.jetbrains.com/help/rider/Coding_Assistance__Naming_Style.html#use-editorconfig-to-configure-naming-rules
+#######################################################
+
+
+## Public and ( Const or Static Readonly ) Fields
+# Symbols - Static and Const
+dotnet_naming_symbols.static_fields.applicable_kinds = field
+dotnet_naming_symbols.static_fields.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.static_fields.required_modifiers = static, const
+
+# Rules - Static and Const
+dotnet_naming_rule.static_fields_all_caps_rule.symbols = static_fields
+dotnet_naming_rule.static_fields_all_caps_rule.style = all_caps_style
+dotnet_naming_rule.static_fields_all_caps_rule.severity = suggestion
+
+# Symbols - Static and Readonly
+dotnet_naming_symbols.static_readonly_fields.applicable_kinds = field
+# dotnet_naming_symbols.static_readonly_fields.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.static_readonly_fields.applicable_accessibilities = public, internal, protected, protected_internal
+dotnet_naming_symbols.static_readonly_fields.required_modifiers = static, readonly
+
+# Rules - Static and Readonly + Static & Const
+dotnet_naming_rule.static_readonly_fields_all_caps_rule.symbols = static_readonly_fields
+dotnet_naming_rule.static_readonly_fields_all_caps_rule.style = all_caps_style
+dotnet_naming_rule.static_readonly_fields_all_caps_rule.severity = suggestion
+
+# Style
+dotnet_naming_style.all_caps_style.capitalization = all_upper
+# dotnet_naming_style.all_caps_style.required_prefix    = 
+# dotnet_naming_style.all_caps_style.required_suffix    = 
+# dotnet_naming_style.all_caps_style.word_separator     =
+
+## Private and ( Const or Static Readonly ) Fields
+# Symbols - Static and Readonly - private
+dotnet_naming_symbols.static_readonly_private_fields.applicable_kinds = field
+dotnet_naming_symbols.static_readonly_private_fields.applicable_accessibilities = private, private_protected
+dotnet_naming_symbols.static_readonly_private_fields.required_modifiers = static, readonly
+
+# Rules - Static - private
+dotnet_naming_rule.static_readonly_private_fields_all_lowercase.symbols = static_readonly_private_fields
+dotnet_naming_rule.static_readonly_private_fields_all_lowercase.style = all_lower_snake__prefix
+dotnet_naming_rule.static_readonly_private_fields_all_lowercase.severity = suggestion
+
+# Symbols - Static and Readonly - private
+dotnet_naming_symbols.private_const_fields.applicable_kinds = field
+dotnet_naming_symbols.private_const_fields.applicable_accessibilities = private, private_protected
+dotnet_naming_symbols.private_const_fields.required_modifiers = const
+
+# Rules - Static and Const - private
+dotnet_naming_rule.private_const_fields_all_lowercase.symbols = private_const_fields
+dotnet_naming_rule.private_const_fields_all_lowercase.style = all_lower_snake__prefix
+dotnet_naming_rule.private_const_fields_all_lowercase.severity = suggestion
+
+# Style - Private and ( Const or Static Readonly ) Fields
+dotnet_naming_style.all_lower_snake__prefix.capitalization = all_lower
+dotnet_naming_style.all_lower_snake__prefix.required_prefix    = _
+# dotnet_naming_style.all_lower_snake__prefix.required_suffix    = 
+dotnet_naming_style.all_lower_snake__prefix.word_separator     = _
+
+
+## Private
+# Symbols
+dotnet_naming_symbols.private_methods.applicable_kinds = method
+dotnet_naming_symbols.private_methods.applicable_accessibilities = private, protected
+# dotnet_naming_symbols.private_methods.required_modifiers            = 
+
+# Rules
+dotnet_naming_rule.private_methods_camel_case_rule.symbols = private_methods
+dotnet_naming_rule.private_methods_camel_case_rule.style = private_methods_camel_case
+dotnet_naming_rule.private_methods_camel_case_rule.severity = suggestion
+
+# Style
+dotnet_naming_style.private_methods_camel_case.capitalization = camel_case
+# dotnet_naming_style.private_methods_camel_case.required_prefix      = 
+# dotnet_naming_style.private_methods_camel_case.required_suffix      = 
+# dotnet_naming_style.private_methods_camel_case.word_separator       = 
+
+
+## Private & Protected Members
+# Symbols
+dotnet_naming_symbols.private_members.applicable_kinds = property,field,event
+dotnet_naming_symbols.private_members.applicable_accessibilities = private,protected
+# dotnet_naming_symbols.private_members.required_modifiers            = 
+
+# Rules
+dotnet_naming_rule.private_members_underscored_camel_case_rule.symbols = private_members
+dotnet_naming_rule.private_members_underscored_camel_case_rule.style = private_members_underscored_camel_case
+dotnet_naming_rule.private_members_underscored_camel_case_rule.severity = suggestion
+
+# Style
+dotnet_naming_style.private_members_underscored_camel_case.capitalization = camel_case
+dotnet_naming_style.private_members_underscored_camel_case.required_prefix = _
+# dotnet_naming_style.private_members_underscored_camel_case.required_suffix      = 
+# dotnet_naming_style.private_members_underscored_camel_case.word_separator       = 
+
+
+## Public
+# Symbols
+dotnet_naming_symbols.public_members.applicable_kinds = property,method,field
+dotnet_naming_symbols.public_members.applicable_accessibilities = public
+# dotnet_naming_symbols.public_members.required_modifiers            = 
+
+# Rules
+dotnet_naming_rule.public_members_pascal_case_rule.symbols = public_members
+dotnet_naming_rule.public_members_pascal_case_rule.style = pascal_case
+dotnet_naming_rule.public_members_pascal_case_rule.severity = suggestion
+
+# Style
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+# dotnet_naming_style.pascal_case.required_prefix      = 
+# dotnet_naming_style.pascal_case.required_suffix      = 
+# dotnet_naming_style.pascal_case.word_separator       = 
+
+
+## Interfaces
+# Symbols
+dotnet_naming_symbols.interface.applicable_kinds = interface
+dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+# dotnet_naming_symbols.interface.required_modifiers          =
+
+# Rules
+dotnet_naming_rule.interface_should_begin_with_i.severity = suggestion
+dotnet_naming_rule.interface_should_begin_with_i.symbols = interface
+dotnet_naming_rule.interface_should_begin_with_i.style = begins_with_i
+
+# Style
+dotnet_naming_style.begins_with_i.required_prefix = I
+# dotnet_naming_style.begins_with_i.required_suffix           =
+# dotnet_naming_style.begins_with_i.word_separator            =
+dotnet_naming_style.begins_with_i.capitalization = pascal_case
+
+
+## Types
+# Symbols
+dotnet_naming_symbols.types.applicable_kinds = class, struct, interface, enum
+dotnet_naming_symbols.types.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+# dotnet_naming_symbols.types.required_modifiers          =
+
+# Rules
+dotnet_naming_rule.types_should_be_pascal_case.severity = suggestion
+dotnet_naming_rule.types_should_be_pascal_case.symbols = types
+# see above definition
+dotnet_naming_rule.types_should_be_pascal_case.style = pascal_case
+
+# 
+# ## Async
+# # Symbols
+# dotnet_naming_symbols.async_methods.applicable_kinds = method
+# dotnet_naming_symbols.async_methods.applicable_accessibilities = public,internal,protected,protected_internal,private_protected
+# dotnet_naming_symbols.async_methods.required_modifiers = async
+# 
+# # Rules
+# dotnet_naming_rule.async_methods_async_suffix_rule.symbols = async_methods
+# dotnet_naming_rule.async_methods_async_suffix_rule.style = async_methods_async_suffix_style
+# dotnet_naming_rule.async_methods_async_suffix_rule.severity = suggestion
+# 
+# # Style
+# dotnet_naming_style.async_methods_async_suffix_style.capitalization = pascal_case
+# # dotnet_naming_style.async_methods_async_suffix_style.required_prefix      = 
+# dotnet_naming_style.async_methods_async_suffix_style.required_suffix = Async
+# # dotnet_naming_style.async_methods_async_suffix_style.word_separator       =
+
+
+# TODO: re-enable below
+dotnet_diagnostic.ca2208.severity = warning
+dotnet_diagnostic.ca1308.severity = suggestion
+
+
+#########
+# Reliability rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/reliability-warnings
+# Completed 2021 July 26
+#########
+
+# CA2000: Dispose objects before losing scope
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2000
+dotnet_diagnostic.ca2000.severity = warning
+
+# CA2002: Do not lock on objects with weak identity
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2002
+dotnet_diagnostic.ca2002.severity = warning
+
+# CA2007: Do not directly await a Task
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2007
+dotnet_diagnostic.ca2007.severity = suggestion
+
+# CA2008: Do not create tasks without passing a TaskScheduler
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2008
+# dotnet_diagnostic.CA2008.severity = none
+
+# CA2009: Do not call ToImmutableCollection on an ImmutableCollection value
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2009
+# dotnet_diagnostic.CA2009.severity = none
+
+# CA2011: Do not assign property within its setter
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2011
+dotnet_diagnostic.ca2011.severity = error
+
+# CA2012: Use ValueTasks correctly
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2012
+dotnet_diagnostic.ca2012.severity = error
+
+# CA2013: Do not use ReferenceEquals with value types
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2013
+# https://devblogs.microsoft.com/dotnet/automatically-find-latent-bugs-in-your-code-with-net-5#do-not-use-referenceequals-with-value-types
+dotnet_diagnostic.ca2013.severity = warning
+
+# CA2014: Do not use stackalloc in loops.
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2014
+# https://devblogs.microsoft.com/dotnet/automatically-find-latent-bugs-in-your-code-with-net-5#do-not-use-stackalloc-in-loops
+dotnet_diagnostic.ca2014.severity = error
+
+# CA2015: Do not define finalizers for types derived from MemoryManager<T>
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2015
+# https://devblogs.microsoft.com/dotnet/automatically-find-latent-bugs-in-your-code-with-net-5#do-not-define-finalizers-for-types-derived-from-memorymanager
+# dotnet_diagnostic.CA2015.severity = none
+
+# CA2016: Forward the CancellationToken parameter to methods that take one
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2016
+dotnet_diagnostic.ca2016.severity = error
+
+# CA2017: Number of parameters supplied in the logging message template do not match the number of named placeholders.
+# LoggerMessageDefineAnalyzer
+# https://github.com/dotnet/roslyn-analyzers/blob/main/src/NetAnalyzers/Microsoft.CodeAnalysis.NetAnalyzers.sarif#L2927
+# Duplicated by Structured Logging plugin for Rider
+dotnet_diagnostic.ca2017.severity = warning
+
+
+
+############
+# Security
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/security-warnings
+# Completed 2021 July 27
+############
+
+# CA2100: Review SQL queries for security vulnerabilities
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2100
+
+# CA2109: Review visible event handlers
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2109
+
+# CA2119: Seal methods that satisfy private interfaces
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2119
+
+# CA2153: Avoid Handling Corrupted State Exceptions
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2153
+
+# CA2300: Do not use insecure deserializer BinaryFormatter
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2300
+
+# CA2301: Do not call BinaryFormatter.Deserialize without first setting BinaryFormatter.Binder
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2301
+
+# CA2302: Ensure BinaryFormatter.Binder is set before calling BinaryFormatter.Deserialize
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2302
+
+# CA2305: Do not use insecure deserializer LosFormatter
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2305
+
+# CA2310: Do not use insecure deserializer NetDataContractSerializer
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2310
+
+# CA2311: Do not deserialize without first setting NetDataContractSerializer.Binder
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2311
+
+# CA2312: Ensure NetDataContractSerializer.Binder is set before deserializing
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2312
+
+# CA2315: Do not use insecure deserializer ObjectStateFormatter
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2315
+
+# CA2321: Do not deserialize with JavaScriptSerializer using a SimpleTypeResolver
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2321
+
+# CA2322: Ensure JavaScriptSerializer is not initialized with SimpleTypeResolver before deserializing
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2322
+# System.Web.Script.Serialization.JavaScriptSerializer
+
+# <--- Newtonsoft --->
+
+# CA2326: Do not use TypeNameHandling values other than None
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2326
+# Newtonsoft.Json.TypeNameHandling
+
+# CA2327: Do not use insecure JsonSerializerSettings
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2327
+# Newtonsoft.Json.JsonSerializerSettings
+
+# CA2328: Ensure that JsonSerializerSettings are secure
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2328
+# Newtonsoft.Json.JsonSerializerSettings
+
+# CA2329: Do not deserialize with JsonSerializer using an insecure configuration
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2329
+
+# CA2330: Ensure that JsonSerializer has a secure configuration when deserializing
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2330
+
+# <--- End of Newtonsoft --->
+
+# <--- System.Data --->
+
+# CA2350: Ensure DataTable.ReadXml()'s input is trusted
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2350
+
+# CA2351: Ensure DataSet.ReadXml()'s input is trusted
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2351
+
+# CA2352: Unsafe DataSet or DataTable in serializable type can be vulnerable to remote code execution attacks
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2352
+
+# CA2353: Unsafe DataSet or DataTable in serializable type
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2353
+
+# CA2354: Unsafe DataSet or DataTable in deserialized object graph can be vulnerable to remote code execution attack
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2354
+
+# CA2355: Unsafe DataSet or DataTable in deserialized object graph
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2355
+
+# CA2356: Unsafe DataSet or DataTable in web deserialized object graph
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2356
+
+# CA2361: Ensure autogenerated class containing DataSet.ReadXml() is not used with untrusted data
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2361
+
+# CA2362: Unsafe DataSet or DataTable in autogenerated serializable type can be vulnerable to remote code execution attacks
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2362
+
+# CA3001: Review code for SQL injection vulnerabilities
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3001
+
+# <--- End of System.Data --->
+
+# CA3002: Review code for XSS vulnerabilities
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3002
+
+# CA3003: Review code for file path injection vulnerabilities
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3003
+
+# CA3004: Review code for information disclosure vulnerabilities
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3004
+
+# CA3006: Review code for process command injection vulnerabilities
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3006
+
+# CA3007: Review code for open redirect vulnerabilities
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3007
+
+# CA3008: Review code for XPath injection vulnerabilities
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3008
+
+# CA3009: Review code for XML injection vulnerabilities
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3009
+
+# CA3010: Review code for XAML injection vulnerabilities
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3010
+
+# CA3011: Review code for DLL injection vulnerabilities
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3011
+
+# CA3012: Review code for regex injection vulnerabilities
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3012
+
+# CA3061: Do not add schema by URL
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3061
+
+# CA3075: Insecure DTD Processing
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3075
+
+# CA3076: Insecure XSLT Script Execution
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3076
+
+# CA3077: Insecure Processing in API Design, XML Document and XML Text Reader
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3077
+
+# CA3147: Mark verb handlers with ValidateAntiForgeryToken
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca3147
+
+# CA5350: Do Not Use Weak Cryptographic Algorithms
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5350
+# Category: Microsoft.Cryptography
+# But it is still under the Security category for docs
+
+# CA5351 Do Not Use Broken Cryptographic Algorithms
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5351
+
+# CA5358: Do Not Use Unsafe Cipher Modes
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5358
+
+# CA5359 Do not disable certificate validation
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5359
+
+# CA5360 Do not call dangerous methods in deserialization
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5360
+
+# CA5361: Do not disable SChannel use of strong crypto
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5361
+
+# CA5362 Potential reference cycle in deserialized object graph
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5362
+
+# CA5363: Do not disable request validation
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5363
+
+# CA5364: Do not use deprecated security protocols
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5364
+
+# CA5365 Do Not Disable HTTP Header Checking
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5365
+
+# CA5366 Use XmlReader For DataSet Read XML
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5366
+
+# CA5367 Do Not Serialize Types With Pointer Fields
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5367
+
+# CA5368 Set ViewStateUserKey For Classes Derived From Page
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5368
+
+# CA5369: Use XmlReader for Deserialize
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5369
+
+# CA5370: Use XmlReader for validating reader
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5370
+
+# CA5371: Use XmlReader for schema read
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5371
+
+# CA5372: Use XmlReader for XPathDocument
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5372
+
+# CA5373: Do not use obsolete key derivation function
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5373
+
+# CA5374 Do Not Use XslTransform
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5374
+
+# CA5375 Do not use account shared access signature
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5375
+
+# CA5376 Use SharedAccessProtocol HttpsOnly
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5376
+
+# CA5377 Use container level access policy
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5377
+
+# CA5378: Do not disable ServicePointManagerSecurityProtocols
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5378
+
+# CA5379 Do not use weak key derivation function algorithm
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5379
+
+# CA5380: Do not add certificates to root store
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5380
+
+# CA5381: Ensure certificates are not added to root store
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5381
+
+# CA5382 Use secure cookies in ASP.NET Core
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5382
+
+# CA5383 Ensure use secure cookies in ASP.NET Core
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5383
+
+# CA5384 Do not use digital signature algorithm (DSA)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5384
+
+# CA5385 Use Rivest–Shamir–Adleman (RSA) algorithm with sufficient key size
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5385
+
+# CA5386: Avoid hardcoding SecurityProtocolType value
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5386
+
+# CA5387 Do not use weak key derivation function with insufficient iteration count
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5387
+
+# CA5388 Ensure sufficient iteration count when using weak key derivation function
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5388
+
+# CA5389: Do not add archive item's path to the target file system path
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5389
+
+# CA5390 Do not hard-code encryption key
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5390
+
+# CA5391 Use anti-forgery tokens in ASP.NET Core MVC controllers
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5391
+
+# CA5392 Use DefaultDllImportSearchPaths attribute for P/Invokes
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5392
+
+# CA5393 Do not use unsafe DllImportSearchPath value
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5393
+
+# CA5394 Do not use insecure randomness
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5394
+# Default is warning, 
+# but it is only required when using Randomness for security / cryptographic purposes
+# Not if a mere random number is required.
+dotnet_diagnostic.ca5394.severity = suggestion
+
+
+# CA5395 Miss HttpVerb attribute for action methods
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5395
+
+# CA5396 Set HttpOnly to true for HttpCookie
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5396
+
+# CA5397: Do not use deprecated SslProtocols values
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5397
+
+# CA5398: Avoid hardcoded SslProtocols values
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5398
+
+# CA5399 Definitely disable HttpClient certificate revocation list check
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5399
+
+# CA5400 Ensure HttpClient certificate revocation list check is not disabled
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5400
+
+# CA5401 Do not use CreateEncryptor with non-default IV
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5401
+
+# CA5402 Use CreateEncryptor with the default IV
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5402
+
+# CA5403: Do not hard-code certificate
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5403
+
+
+############
+# SingleFile
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/singlefile-warnings
+# Completed 2021 July 27
+############
+
+# IL3000: Avoid accessing Assembly file path when publishing as a single file
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/il3000
+
+# IL3001 Avoid accessing Assembly file path when publishing as a single-file
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/il3001
+
+# IL3002 Avoid calling members annotated with 'RequiresAssemblyFilesAttribute' when publishing as a single file
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/il3002
+
+
+############
+# Style Rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/
+# Completed on 2021 July 29
+############
+
+# IDE0001: Name can be simplified - do not use fully qualified paths to local classes
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0001
+dotnet_diagnostic.ide0001.severity = none
+
+# IDE0002: Name can be simplified - class not required when calling type's own static method
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0002
+dotnet_diagnostic.ide0002.severity = none
+
+# IDE0003: Name can be simplified - remove `this.`
+# Style / Language rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009
+# dotnet_diagnostic.IDE0003.severity = none
+dotnet_style_qualification_for_field = true:suggestion
+dotnet_style_qualification_for_property = true:none
+dotnet_style_qualification_for_method = true:suggestion
+dotnet_style_qualification_for_event = true:none
+
+# IDE0004 - remove unnecessary casts
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0004
+dotnet_diagnostic.ide1004.severity = suggestion
+
+# IDE0005 - remove unnecessary imports ( using, using static )
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0005
+dotnet_diagnostic.ide1005.severity = suggestion
+
+# IDE0006 - Naming rule violation
+# Naming
+# eg. These words must begin with upper case characters
+# This applies to the naming rules (see above)
+#    dotnet_naming_style
+#    dotnet_naming_symbols
+#    dotnet_naming_rule
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/naming-rules#rule-id-ide1006-naming-rule-violation
+# dotnet_diagnostic.IDE1006.severity = // default
+
+# IDE0007 - use var
+# IDE0008 - don't use var
+# Style / Language rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0007-ide0008
+dotnet_diagnostic.ide0008.severity = none
+# dotnet_diagnostic.IDE0008.severity      = suggestion
+# csharp_style_var_for_built_in_types     = false
+# csharp_style_var_when_type_is_apparent  = false
+# csharp_style_var_elsewhere              = false
+
+# IDE0009 - counter to IDE0003 - Add `this`
+# Style / Language rules
+# controlled by the same dotnet_style settings as for IDE0003
+
+# IDE0010 - Add missing cases to switch statement
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0010
+dotnet_diagnostic.ide0010.severity = suggestion
+
+# IDE0011 - prefer curly braces
+# Style / Language rules (code block preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0011
+dotnet_diagnostic.ide0011.severity = suggestion
+csharp_prefer_braces = true:suggestion
+
+# IDE0016 - Use throw expression
+# Style / Language rules (null-checking preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0016
+dotnet_diagnostic.ide0016.severity = suggestion
+csharp_style_throw_expression = true:suggestion
+
+# IDE0017 - Use object initializers
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0017
+dotnet_diagnostic.ide0017.severity = suggestion
+dotnet_style_object_initializer = true:suggestion
+
+# IDE0018 - Inline variable declaration
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0018
+dotnet_diagnostic.ide0018.severity = warning
+csharp_style_inlined_variable_declaration = true:warning
+
+# IDE0019 - Use pattern matching to avoid 'as' followed by a 'null' check
+# Style / Language rules (pattern matching preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0019
+dotnet_diagnostic.ide0019.severity = warning
+csharp_style_pattern_matching_over_as_with_null_check = true:warning
+
+# IDE0020 - Use pattern matching to avoid is check followed by a cast (with variable)
+# Style / Language rules (pattern matching preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0020
+dotnet_diagnostic.ide0020.severity = warning
+csharp_style_pattern_matching_over_is_with_cast_check = true
+
+# IDE0021 - Use expression body for constructors
+# Style / Language rules (expression-bodied members)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0021
+dotnet_diagnostic.ide0021.severity = suggestion
+csharp_style_expression_bodied_constructors = true:suggestion
+
+# IDE0022 - Use expression body for methods
+# Style / Language rules (expression-bodied members)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0022
+# dotnet_diagnostic.IDE0022.severity = suggestion
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+# csharp_style_expression_bodied_methods = true
+
+# IDE0023 - Use expression body for conversion operators
+# Style / Language rules (expression-bodied members)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0023-ide0024
+dotnet_diagnostic.ide0023.severity = suggestion
+csharp_style_expression_bodied_operators = when_on_single_line:suggestion
+
+# IDE0024 - Use expression body for operators
+# Style / Language rules (expression-bodied members)
+# see IDE0023
+dotnet_diagnostic.ide0024.severity = suggestion
+
+# IDE0025 - Use expression body for properties
+# Style / Language rules (expression-bodied members)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0025
+dotnet_diagnostic.ide0025.severity = suggestion
+csharp_style_expression_bodied_properties = when_on_single_line:suggestion
+
+# IDE0026 - Use expression body for indexers
+# Style / Language rules (expression-bodied members)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0026
+dotnet_diagnostic.ide0026.severity = suggestion
+csharp_style_expression_bodied_indexers = when_on_single_line:suggestion
+
+# IDE0027 - Use expression body for accessors
+# Style / Language rules (expression-bodied members)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0027
+dotnet_diagnostic.ide0027.severity = suggestion
+csharp_style_expression_bodied_accessors = when_on_single_line:suggestion
+
+# IDE0028 - Use collection initializers
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0028
+dotnet_diagnostic.ide0028.severity = suggestion
+dotnet_style_collection_initializer = true:suggestion
+
+# IDE0029: Use coalesce expression (non-nullable types)
+# Style / Language rules (null-checking preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0029-ide0030
+dotnet_diagnostic.ide0029.severity = suggestion
+dotnet_style_coalesce_expression = true:suggestion
+
+# IDE0030: Use coalesce expression (nullable types)
+# Style / Language rules (null-checking preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0029-ide0030
+dotnet_diagnostic.ide0030.severity = suggestion
+
+# IDE0031 - Use null propagation
+# Style / Language rules (null-checking preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0031
+dotnet_diagnostic.ide0031.severity = suggestion
+dotnet_style_null_propagation = true:suggestion
+
+# IDE0032 - Use auto property
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0032
+# This only applies for private properties
+dotnet_diagnostic.ide0032.severity = suggestion
+dotnet_style_prefer_auto_properties = false
+
+# IDE0033 - Use explicitly provided tuple name
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0033
+dotnet_diagnostic.ide0033.severity = suggestion
+dotnet_style_explicit_tuple_names = true
+
+# IDE0034 - Simplify 'default' expression
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0034
+dotnet_diagnostic.ide0034.severity = suggestion
+csharp_prefer_simple_default_expression = true
+
+# IDE0035 - Remove unreachable code
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0035
+dotnet_diagnostic.ide0035.severity = suggestion
+
+# IDE0036 - Order modifiers
+# Style / Language rules (modifier preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0036
+dotnet_diagnostic.ide0036.severity = suggestion
+# csharp_preferred_modifier_order // using default
+
+# IDE0037 - Use inferred member name
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0037
+dotnet_diagnostic.ide0037.severity = warning
+dotnet_style_prefer_inferred_tuple_names = false
+dotnet_style_prefer_inferred_anonymous_type_member_names = false
+
+# IDE0038 - Use pattern matching to avoid is check followed by a cast (without variable)
+# Style / Language rules (pattern matching preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0020-ide0038
+# see IDE0020 for csharp_style_pattern_matching_over_is_with_cast_check
+dotnet_diagnostic.ide0038.severity = warning
+
+# IDE0039 - Use local function instead of lambda
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0039
+dotnet_diagnostic.ide0039.severity = suggestion
+# csharp_style_pattern_local_over_anonymous_function = true // this is the default
+
+# IDE0040 - Add accessibility modifiers
+# Style / Language rules (modifier preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0040
+dotnet_diagnostic.ide0040.severity = suggestion
+dotnet_style_require_accessibility_modifiers = always
+
+# IDE0041 - Use is null check 
+# Style / Language rules (null-checking preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0041
+dotnet_diagnostic.ide0041.severity = suggestion
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
+
+# IDE0042 - Deconstruct variable declaration
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0042
+# dotnet_diagnostic.IDE0042.severity = suggestion
+# csharp_style_deconstructed_variable_declaration = true // I don't have a strong preference, using the default
+
+# IDE0044 - Add readonly modifier
+# Style / Language rules (modifier preferences)
+# ?? I had this, the docs aren't aligned = Member 'xxx' is explicitly initialized to its default value
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0044
+dotnet_diagnostic.ide0044.severity = suggestion
+# dotnet_style_readonly_field = true // default
+
+# IDE0045 - Use conditional expression for assignment
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0045
+dotnet_diagnostic.ide0045.severity = suggestion
+# dotnet_style_prefer_conditional_expression_over_assignment = true // default
+
+# IDE0046 - Use conditional expression for return 
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0046
+dotnet_diagnostic.ide0046.severity = suggestion
+# dotnet_style_prefer_conditional_expression_over_return = true // default
+
+# IDE0047 - Remove unnecessary parentheses
+# Style / Language rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0047-ide0048
+dotnet_diagnostic.ide0047.severity = suggestion
+dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity:suggestion
+dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:suggestion
+dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:suggestion
+dotnet_style_parentheses_in_other_operators = always_for_clarity:suggestion
+
+# IDE0048 - Add parentheses for clarity
+# Style / Language rules
+# see IDE0047
+dotnet_diagnostic.ide0048.severity = suggestion
+
+# IDE0049 - Use language keywords instead of framework type names for type references
+# Style / Language rules
+# Name can be simplified - Boolean -> bool ; Int64 -> long
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049
+dotnet_diagnostic.ide0049.severity = suggestion
+dotnet_style_predefined_type_for_locals_parameters_members = true:suggestion
+dotnet_style_predefined_type_for_member_access = false:suggestion
+
+# IDE0050 - Convert anonymous type to tuple
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0050
+dotnet_diagnostic.ide0050.severity = warning
+
+# IDE0051 - Remove unused private member
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0051
+dotnet_diagnostic.ide0051.severity = warning
+
+# IDE0052 - Remove unread private member
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0052
+dotnet_diagnostic.ide0052.severity = suggestion
+
+# IDE0053 - Use expression body for lambdas
+# Style / Language rules (expression-bodied members)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0053
+dotnet_diagnostic.ide0053.severity = suggestion
+csharp_style_expression_bodied_lambdas = when_on_single_line
+
+# IDE0054 - Use compound assignment
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0054-ide0074
+dotnet_diagnostic.ide0054.severity = suggestion
+dotnet_style_prefer_compound_assignment = false:suggestion
+
+# IDE0055 - Fix Formatting
+# Formatting
+# Handles errors for all formatting rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/formatting-rules#rule-id-ide0055-fix-formatting
+dotnet_diagnostic.ide0055.severity = warning
+
+# IDE0056 - Use index operator
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0056
+dotnet_diagnostic.ide0056.severity = suggestion
+csharp_style_prefer_index_operator = true:suggestion
+
+# IDE0057 - Use range operator
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0057
+dotnet_diagnostic.ide0057.severity = suggestion
+csharp_style_prefer_range_operator = true:suggestion
+
+# IDE0058 - Remove unnecessary expression value
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0058
+dotnet_diagnostic.ide0058.severity = none
+# csharp_style_unused_value_expression_statement_preference = discard_variable
+
+# IDE0059 - Remove unnecessary value assignment
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0059
+dotnet_diagnostic.ide0059.severity = none
+# csharp_style_unused_value_assignment_preference = discard_variable
+
+# IDE0060 - Remove unused parameter
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0060
+dotnet_diagnostic.ide0060.severity = warning
+dotnet_code_quality_unused_parameters = all
+
+# IDE0061 - Use expression body for local functions
+# Style / Language rules (expression-bodied members)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0061
+dotnet_diagnostic.ide0061.severity = suggestion
+csharp_style_expression_bodied_local_functions = when_on_single_line
+
+# IDE0062 - Make local function static
+# Style / Language rules (modifier preferences)
+# default is true
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0062
+dotnet_diagnostic.IDE0062.severity = suggestion
+csharp_prefer_static_local_function = true
+
+# IDE0063 - Use simple 'using' statement
+# Style / Language rules (code block preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0063
+dotnet_diagnostic.ide0063.severity = suggestion
+# csharp_prefer_simple_using_statement = true // default
+
+# IDE0064 - Make struct fields writable
+# CodeQuality / Language rules (modifier preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0064
+# dotnet_diagnostic.IDE0064.severity = suggestion
+
+# IDE0065 - 'using' directive placement
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0065
+# dotnet_diagnostic.IDE0065.severity = suggestion
+# csharp_using_directive_placement = outside_namespace // default
+
+# IDE0066 - Use switch expression
+# Style / Language rules (pattern matching preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0066
+# dotnet_diagnostic.IDE0066.severity = suggestion
+# csharp_style_prefer_switch_expression = true // default
+
+# IDE0070 - Use System.HashCode.Combine
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0070
+dotnet_diagnostic.ide0070.severity = suggestion
+
+# IDE0071 - Simplify interpolation
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0071
+# dotnet_diagnostic.IDE0071.severity = suggestion
+# dotnet_style_prefer_simplified_interpolation = true // default
+
+# IDE0072 - Add missing cases to switch expression
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0072
+# dotnet_diagnostic.IDE0072.severity = warning
+
+# IDE0073 - Use file header
+# Style / Language rules (file header preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0073
+# dotnet_diagnostic.IDE0073.severity = suggestion
+# file_header_template = 
+
+# IDE0074 - Use coalesce compound assignment
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0054-ide0074
+# see IDE0054
+dotnet_diagnostic.ide0074.severity = suggestion
+
+# IDE0075 - Simplify conditional expression
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0075
+# dotnet_diagnostic.IDE0075.severity = // default
+# dotnet_style_prefer_simplified_boolean_expressions = true // default
+
+# IDE0076 - Remove invalid global SuppressMessageAttribute
+# CodeQuality / Miscellaneous rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0076
+# dotnet_diagnostic.IDE0076.severity = // default
+
+# IDE0077 - Avoid legacy format target in global SuppressMessageAttribute
+# CodeQuality / Miscellaneous rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0077
+# dotnet_diagnostic.IDE0077.severity = // default
+
+# IDE0078 - Use pattern matching
+# Style / Language rules (pattern matching preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0078
+dotnet_diagnostic.ide0078.severity = suggestion
+csharp_style_prefer_pattern_matching = true
+
+# IDE0079 - Remove unnecessary suppression
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0079
+# dotnet_diagnostic.IDE0079.severity = // default
+# dotnet_remove_unnecessary_suppression_exclusions = // default
+
+# IDE0080 - Remove unnecessary suppression operator
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0080
+dotnet_diagnostic.ide0080.severity = warning
+
+# IDE0081
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0081
+# Visual Basic only
+
+# IDE0082 - Convert typeof to nameof
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0082
+dotnet_diagnostic.ide0082.severity = suggestion
+
+# IDE0083 - Use pattern matching (`not` operator)
+# Style / Language rules (pattern matching preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0083
+dotnet_diagnostic.ide0083.severity = suggestion
+csharp_style_prefer_not_pattern = true:suggestion
+
+# IDE0084
+# Visual Basic only
+
+# IDE0090 - Simplify new expression
+# Style / Language rules (expression-level preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0090
+# if the type is set in the declaration, new does not need a type specified.
+# eg.
+# List<string> strings = new ();
+dotnet_diagnostic.ide0090.severity = none
+csharp_style_implicit_object_creation_when_type_is_apparent = true:none
+
+# IDE0100 - Remove unnecessary equality operator
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0100
+dotnet_diagnostic.ide0100.severity = warning
+
+# IDE0110 - Remove unnecessary discard
+# Style / Unnecessary code rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0110
+# dotnet_diagnostic.IDE0110.severity = // default
+
+# IDE0140
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0110
+# Visual Basic only
+
+# IDE0150
+# THIS IS CURRENTLY UNDOCUMENTED (2022-04-24)
+# I would guess the documentation to eventually be at:
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0150
+# GitHub issue: https://github.com/dotnet/roslyn/issues/55005
+# example: https://github.com/RehanSaeed/EditorConfig/blob/main/.editorconfig
+# csharp_style_prefer_null_check_over_type_check
+
+# IDE1005 - Use conditional delegate call
+# Style / Language rules (null-checking preferences)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide1005
+# dotnet_diagnostic.IDE1005.severity = // default
+# csharp_style_conditional_delegate_call = true // default
+
+
+# RCS1213: Remove unused member declaration
+dotnet_diagnostic.rcs1213.severity = warning
+
+# Make field read-only
+dotnet_diagnostic.rcs1169.severity = warning
+
+
+#########
+# Design
+# Microsoft.Design
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/design-warnings
+# Complete as of 2021 July 25
+#########
+
+# CA1000: Do not declare static members on generic types
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1000
+
+# CA1001: Types that own disposable fields should be disposable
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1001
+dotnet_diagnostic.ca1001.severity = warning
+
+# CA1002: Do not expose generic lists
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1002
+dotnet_diagnostic.ca1002.severity = warning
+# dotnet_code_quality.CA1002.api_surface = private, internal // example only
+
+# CA1003: Use generic event handler instances
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1003
+dotnet_diagnostic.ca1003.severity = warning
+
+# CA1005: Avoid excessive parameters on generic types
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1005
+dotnet_diagnostic.ca1005.severity = warning
+
+# CA1008: Enums should have zero value
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1008
+dotnet_diagnostic.ca1008.severity = warning
+
+# CA1010: Collections should implement generic interface
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1010
+dotnet_diagnostic.ca1010.severity = warning
+
+# CA1012: Abstract types should not have constructors
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1012
+dotnet_diagnostic.ca1012.severity = warning
+
+# CA1014: Mark assemblies with CLSCompliantAttribute
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1014
+dotnet_diagnostic.ca1014.severity = none
+
+# CA1016: Mark assemblies with AssemblyVersionAttribute
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1016
+dotnet_diagnostic.ca1016.severity = none
+
+# CA1017: Mark assemblies with ComVisibleAttribute
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1017
+dotnet_diagnostic.ca1017.severity = none
+
+# CA1018: Mark attributes with AttributeUsageAttribute
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1018
+dotnet_diagnostic.ca1018.severity = warning
+
+# CA1019: Define accessors for attribute arguments
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1019
+dotnet_diagnostic.ca1019.severity = warning
+
+# CA1021: Avoid out parameters
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1021
+dotnet_diagnostic.ca1021.severity = none
+
+# CA1024: Use properties where appropriate
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1024
+dotnet_diagnostic.ca1024.severity = warning
+
+# CA1027: Mark enums with FlagsAttribute
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1027
+dotnet_diagnostic.ca1027.severity = warning
+
+# CA1028: Enum storage should be Int32
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1028
+dotnet_diagnostic.ca1028.severity = warning
+
+# CA1030: Use events where appropriate
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1030
+dotnet_diagnostic.ca1030.severity = warning
+
+# CA1031: Do not catch general exception types
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1031
+dotnet_diagnostic.ca1031.severity = warning
+
+# CA1032: Implement standard exception constructors
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1032
+dotnet_diagnostic.ca1032.severity = warning
+
+# CA1033: Interface methods should be callable by child types
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1033
+dotnet_diagnostic.ca1033.severity = warning
+
+# CA1034: Nested types should not be visible
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1034
+dotnet_diagnostic.ca1034.severity = warning
+
+# CA1036: Override methods on comparable types
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1036
+dotnet_diagnostic.ca1036.severity = warning
+
+# CA1040: Avoid empty interfaces
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1040
+dotnet_diagnostic.ca1040.severity = warning
+
+# CA1041: Provide ObsoleteAttribute message
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1041
+dotnet_diagnostic.ca1041.severity = warning
+
+# CA1043: Use integral or string argument for indexers
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1043
+dotnet_diagnostic.ca1043.severity = warning
+
+# CA1044: Properties should not be write only
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1044
+dotnet_diagnostic.ca1044.severity = warning
+
+# CA1045: Do not pass types by reference
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1045
+dotnet_diagnostic.ca1045.severity = none
+
+# CA1046: Do not overload operator equals on reference types
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1046
+dotnet_diagnostic.ca1046.severity = none
+
+# CA1047: Do not declare protected members in sealed types
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1047
+dotnet_diagnostic.ca1047.severity = warning
+
+# CA1050: Declare types in namespaces
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1051
+dotnet_diagnostic.ca1050.severity = warning
+
+# CA1051: Do not declare visible instance fields
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1051
+dotnet_diagnostic.ca1051.severity = warning
+dotnet_code_quality.ca1051.api_surface = private, internal
+
+# CA1052: Static holder types should be sealed
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1052
+dotnet_diagnostic.ca1052.severity = warning
+
+# CA1053: Static holder types should not have constructors
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1053
+dotnet_diagnostic.ca1053.severity = warning
+
+# CA1054: URI parameters should not be strings
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1054
+dotnet_diagnostic.ca1054.severity = warning
+
+# CA1055: URI return values should not be strings
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1055
+dotnet_diagnostic.ca1055.severity = warning
+
+# CA1056: URI properties should not be strings
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1056
+dotnet_diagnostic.ca1056.severity = warning
+
+# CA1058: Types should not extend certain base types
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1058
+dotnet_diagnostic.ca1058.severity = warning
+
+# CA1060: Move P/Invokes to NativeMethods class
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1060
+dotnet_diagnostic.ca1060.severity = warning
+
+# CA1061: Do not hide base class methods
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1061
+dotnet_diagnostic.ca1061.severity = warning
+
+# CA1062: Validate arguments of public methods
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1062
+# this option has several additional possible settings
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1062#configure-code-to-analyze
+# see also:
+# https://www.jetbrains.com/help/rider/Reference__Code_Inspections_CSHARP.html#CodeRedundancy
+dotnet_diagnostic.ca1062.severity = warning
+dotnet_code_quality.CA1062.exclude_extension_method_this_parameter = true
+dotnet_code_quality.CA1062.api_surface = public
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1062#null-check-validation-methods
+dotnet_code_quality.CA1062.null_check_validation_methods = ThrowIfNullElseReturn|ReturnCreatedInstanceElseThrow
+
+# CA1063: Implement IDisposable correctly
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1063
+dotnet_diagnostic.ca1063.severity = warning
+
+# CA1064: Exceptions should be public
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1064
+dotnet_diagnostic.ca1064.severity = warning
+
+# CA1065: Do not raise exceptions in unexpected locations
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1065
+dotnet_diagnostic.ca1065.severity = warning
+
+# CA1066: Implement IEquatable when overriding Equals
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1066
+dotnet_diagnostic.ca1066.severity = warning
+
+# CA1067: Override Equals when implementing IEquatable
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1067
+dotnet_diagnostic.ca1067.severity = warning
+
+# CA1068: CancellationToken parameters must come last
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1068
+dotnet_diagnostic.ca1068.severity = error
+
+# CA1069: Enums should not have duplicate values
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1069
+dotnet_diagnostic.ca1069.severity = error
+
+# CA1070: Do not declare event fields as virtual
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1070
+dotnet_diagnostic.ca1070.severity = warning
+
+
+
+
+#########
+# Globalization
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/globalization-warnings
+# Completed 2021 July 25
+#########
+
+# CA1303: Do not pass literals as localized parameters
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1303
+dotnet_diagnostic.ca1303.severity = none
+dotnet_code_quality.CA1303.use_naming_heuristic = false
+
+# CA1304: Specify CultureInfo
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1304
+dotnet_diagnostic.CA1304.severity = suggestion
+
+# CA1305: Specify IFormatProvider
+# eg. The behavior of 'DateTime.ToString(string)' could vary based on the current user's locale settings.
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1305
+dotnet_diagnostic.ca1305.severity = suggestion
+
+# CA1307: Specify StringComparison for clarity
+# (for dotnet 5 preparation)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1307
+dotnet_diagnostic.ca1307.severity = warning
+
+# CA1308: Normalize strings to uppercase
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1308
+dotnet_diagnostic.CA1308.severity = suggestion
+
+# CA1309: Use ordinal StringComparison
+# (for dotnet 5 preparation)
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1309
+dotnet_diagnostic.ca1309.severity = warning
+
+# CA1310: Specify StringComparison for correctness
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1310
+dotnet_diagnostic.ca1310.severity = suggestion
+# todo: increase this to error?
+
+# CA2101: Specify marshaling for P/Invoke string arguments
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2101
+
+
+#########
+# Portability and Interoperability Warnings
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/interoperability-warnings
+# Completed 2021 July 25
+#########
+
+# CA1401: P/Invokes should not be visible
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1401
+
+# CA1416: Validate platform compatibility
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1416
+dotnet_diagnostic.ca1416.severity = warning
+
+# CA1417: Do not use OutAttribute on string parameters for P/Invokes
+# https://devblogs.microsoft.com/dotnet/automatically-find-latent-bugs-in-your-code-with-net-5#do-not-use-outattribute-on-string-parameters-for-pinvokes
+
+
+
+#########
+# Maintainability warnings
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/maintainability-warnings
+# Completed 2021 July 25
+#########
+
+# CA1500: Variable names should not match field names
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1500
+
+
+# CA1501: Avoid excessive inheritance
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1501
+
+
+# CA1502: Avoid excessive complexity
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1502
+
+
+# CA1504: Review misleading field names
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1504
+
+
+# CA1505: Avoid unmaintainable code
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1505
+
+
+# CA1506: Avoid excessive class coupling
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1506
+
+
+# CA1507: Use nameof in place of string
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1507
+dotnet_diagnostic.ca1507.severity = warning
+
+# CA1508: Avoid dead conditional code
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1508
+
+
+# CA1509: Invalid entry in code metrics configuration file
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1509
+
+
+#########
+# Naming Rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/naming-warnings
+# Completed 2021 July 25
+#########
+
+# CA1700: Do not name enum values 'Reserved'
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1700
+
+# CA1702: Compound words should be cased correctly
+# CA1702: 
+# CA1703: Resource strings should be spelled correctly
+# DEPRECATED
+#     https://docs.microsoft.com/en-us/visualstudio/code-quality/fxcop-unported-deprecated-rules
+
+
+# CA1704: Identifiers should be spelled correctly
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1704
+dotnet_diagnostic.ca1704.severity = warning
+
+# CA1707: Identifiers should not contain underscores
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1707
+dotnet_diagnostic.ca1707.severity = none
+
+# CA1708: Identifiers should differ by more than case
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1708
+dotnet_diagnostic.ca1708.severity = warning
+
+# CA1709: Identifiers should be cased correctly
+dotnet_diagnostic.ca1709.severity = warning
+
+# CA1710: Identifiers should have correct suffix
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1710
+# dotnet_diagnostic.CA1710.severity = warning
+# dotnet_code_quality.ca1710.additional_required_suffixes = T:System.Collections.Generic.IReadOnlyDictionary`2->s|IndicatorParameters->Parameters
+# For testing:
+#   IndicatorParameters->15Parameters|
+# I could not get the {} clearing to work
+# |T:System.Collections.IDictionary->{}|T:System.Collections.IDictionary`2->{}|T:System.Collections.Generic.IDictionary`2->xx
+# dotnet_code_quality.CA1710.additional_required_suffixes = T:System.Collections.Generic.IReadOnlyDictionary`2->{}
+
+# CA1711: Identifiers should not have incorrect suffix
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1711
+dotnet_diagnostic.ca1711.severity = warning
+
+# CA1712: Do not prefix enum values with type name
+dotnet_diagnostic.ca1712.severity = warning
+
+# CA1713: Events should not have before or after prefix
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1713
+
+# CA1714: Flags enums should have plural names
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1714
+dotnet_diagnostic.ca1714.severity = warning
+
+# CA1715: Identifiers should have correct prefix
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1715
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1715
+dotnet_diagnostic.ca1715.severity = warning
+
+# CA1716: Identifiers should not match keywords
+dotnet_diagnostic.ca1716.severity = warning
+
+# CA1717: Only FlagsAttribute enums should have plural names
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1717
+dotnet_diagnostic.ca1717.severity = warning
+
+# CA1719: Parameter names should not match member names
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1719
+dotnet_diagnostic.ca1719.severity = warning
+
+# CA1720: Identifiers should not contain type names
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1720
+dotnet_diagnostic.ca1720.severity = warning
+
+# CA1721: Property names should not match get methods
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1721
+dotnet_diagnostic.ca1721.severity = warning
+
+# CA1722: Identifiers should not have incorrect prefix
+dotnet_diagnostic.ca1722.severity = warning
+
+# CA1724: Type Names Should Not Match Namespaces
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1724
+# TODO: should this be an error?
+dotnet_diagnostic.ca1724.severity = warning
+
+# CA1725: Parameter names should match base declaration
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1725
+dotnet_diagnostic.ca1725.severity = warning
+
+# CA1726: Use preferred terms
+# https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1726
+dotnet_diagnostic.ca1726.severity = warning
+
+# CA1727: Use PascalCase for named placeholders in the logging message template.
+# LoggerMessageDefineAnalyzer
+# https://github.com/dotnet/roslyn-analyzers/blob/main/src/NetAnalyzers/Microsoft.CodeAnalysis.NetAnalyzers.sarif#L2034
+# Duplicated by Structured Logging plugin for Rider
+dotnet_diagnostic.CA1727.severity = suggestion
+
+
+
+
+
+#########
+# Performance rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/performance-warnings
+# Completed 2021 July 25
+#########
+
+# CA1802: Use Literals Where Appropriate
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1802
+dotnet_diagnostic.ca1802.severity = suggestion
+
+# CA1805: Do not initialize unnecessarily
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1805
+dotnet_diagnostic.ca1805.severity = none
+
+# CA1806: Do not ignore method results
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1806
+dotnet_diagnostic.ca1806.severity = warning
+
+# CA1810: Initialize reference type static fields inline
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1810
+dotnet_diagnostic.ca1810.severity = warning
+
+# CA1812: Avoid uninstantiated internal classes
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1812
+dotnet_diagnostic.ca1812.severity = warning
+
+# CA1813: Avoid unsealed attributes
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1813
+dotnet_diagnostic.ca1813.severity = warning
+
+# CA1814: Prefer jagged arrays over multidimensional
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1814
+dotnet_diagnostic.ca1814.severity = suggestion
+
+# CA1815: Override equals and operator equals on value types
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1815
+dotnet_diagnostic.ca1815.severity = warning
+
+# CA1816 - in the "Usage" category
+
+# CA1819: Properties should not return arrays
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1819
+dotnet_diagnostic.ca1819.severity = suggestion
+
+# CA1820: Test for empty strings using string length
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1820
+dotnet_diagnostic.ca1820.severity = warning
+
+# CA1821: Remove empty finalizers
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1821
+dotnet_diagnostic.ca1821.severity = warning
+
+# CA1822: Mark members as static
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1822
+dotnet_diagnostic.ca1822.severity = suggestion
+# dotnet_code_quality.ca1822.api_surface = private, internal
+
+# CA1823: Avoid unused private fields
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1823
+dotnet_diagnostic.ca1823.severity = warning
+
+# CA1824: Mark assemblies with NeutralResourcesLanguageAttribute
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1824
+dotnet_diagnostic.ca1824.severity = warning
+
+# CA1825: Avoid zero-length array allocations
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1825
+dotnet_diagnostic.ca1825.severity = warning
+
+# CA1826: Use property instead of Linq Enumerable method
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1826
+dotnet_diagnostic.ca1826.severity = warning
+
+# CA1827: Do not use Count/LongCount when Any can be used
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1827
+
+# CA1828: Do not use CountAsync/LongCountAsync when AnyAsync can be used
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1828
+dotnet_diagnostic.ca1828.severity = warning
+
+# CA1829: Use Length/Count property instead of Enumerable.Count method
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1829
+dotnet_diagnostic.ca1829.severity = warning
+
+# CA1830: Prefer strongly-typed Append and Insert method overloads on StringBuilder
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1830
+dotnet_diagnostic.ca1830.severity = warning
+
+# CA1831: Use AsSpan instead of Range-based indexers for string when appropriate
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1831
+# https://devblogs.microsoft.com/dotnet/automatically-find-latent-bugs-in-your-code-with-net-5#use-asspan-instead-of-range-based-indexers-for-string-when-appropriate
+dotnet_diagnostic.ca1831.severity = warning
+
+# CA1832: Use AsSpan or AsMemory instead of Range-based indexers for getting ReadOnlySpan or ReadOnlyMemory portion of an array
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1832
+dotnet_diagnostic.ca1832.severity = warning
+
+# CA1833: Use AsSpan or AsMemory instead of Range-based indexers for getting Span or Memory portion of an array
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1833
+dotnet_diagnostic.ca1833.severity = warning
+
+# CA1834: Use StringBuilder.Append(char) for single character strings
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1834
+dotnet_diagnostic.ca1834.severity = warning
+
+# CA1835: Prefer the 'Memory'-based overloads for 'ReadAsync' and 'WriteAsync'
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1835
+dotnet_diagnostic.ca1835.severity = warning
+
+# CA1836: Prefer IsEmpty over Count when available
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1836
+dotnet_diagnostic.ca1836.severity = warning
+
+# CA1837: Use Environment.ProcessId instead of Process.GetCurrentProcess().Id
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1837
+dotnet_diagnostic.ca1837.severity = warning
+
+# CA1838: Avoid StringBuilder parameters for P/Invokes
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1838
+dotnet_diagnostic.ca1838.severity = warning
+
+# CA1841: Prefer Dictionary Contains methods
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1841
+dotnet_diagnostic.ca1841.severity = suggestion
+
+# CA1844: Provide memory-based overrides of async methods when subclassing 'Stream'
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1844
+dotnet_diagnostic.ca1844.severity = warning
+
+# CA1845: Use span-based 'string.Concat'
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1845
+dotnet_diagnostic.ca1845.severity = suggestion
+
+# CA1846: Prefer AsSpan over Substring
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1846
+# TODO: There's no reason this should be a warning permanently, 
+#       just while I get through the backlog of issues
+dotnet_diagnostic.ca1846.severity = warning
+
+# CA1847: Use char literal for a single character lookup
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1847
+# TODO: There's no reason this should be a warning permanently, 
+#       just while I get through the backlog of issues
+dotnet_diagnostic.ca1847.severity = warning
+
+# CA1848: For improved performance, use the LoggerMessage delegates.
+# LoggerMessageDefineAnalyzer
+# https://github.com/dotnet/roslyn-analyzers/blob/main/src/NetAnalyzers/Microsoft.CodeAnalysis.NetAnalyzers.sarif#L2684
+# TODO: Increase this to warning later on?
+dotnet_diagnostic.CA1848.severity = suggestion
+
+
+# CA1850: Prefer static 'HashData' method over 'ComputeHash'
+# https://docs.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1850
+dotnet_diagnostic.ca1850.severity = suggestion
+
+#########
+# Correctness
+#########
+
+# CS0177: Track definite assignment of structs across assemblies
+# https://devblogs.microsoft.com/dotnet/automatically-find-latent-bugs-in-your-code-with-net-5#track-definite-assignment-of-structs-across-assemblies
+# Default: Warning
+dotnet_diagnostic.cs0177.severity = warning
+
+# CS0185: Do not allow locks on non-reference types
+# https://devblogs.microsoft.com/dotnet/automatically-find-latent-bugs-in-your-code-with-net-5#do-not-allow-locks-on-non-reference-types
+# Default: Error
+dotnet_diagnostic.cs0185.severity = error
+
+# CS0312: The type 'x' cannot be used as type parameter 'xx' in the generic type or method 'xxx'. The nullable type 'nullableTypeName' does not satisfy the constraint of 'ConstraintName'.
+dotnet_diagnostic.cs0312.severity = error
+
+# CS7023: Do not allow as or is on static types
+# https://devblogs.microsoft.com/dotnet/automatically-find-latent-bugs-in-your-code-with-net-5#do-not-allow-as-or-is-on-static-types
+# Default: Error
+dotnet_diagnostic.cs7023.severity = error
+
+#########
+# Usage Rules
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/usage-warnings
+# Completed 2021 July 26
+#########
+
+# CA1801: Review unused parameters
+# DEPRECATED in favor of IDE0060
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1801
+dotnet_diagnostic.ca1801.severity = none
+
+# CA1816: Call GC.SuppressFinalize correctly
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1816
+dotnet_diagnostic.ca1816.severity = warning
+
+# CA2200: Rethrow to preserve stack details
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2200
+# https://devblogs.microsoft.com/dotnet/automatically-find-latent-bugs-in-your-code-with-net-5#rethrow-to-preserve-stack-details
+dotnet_diagnostic.ca2200.severity = warning
+
+# CA2201: Do not raise reserved exception types
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2201
+dotnet_diagnostic.ca2201.severity = warning
+
+# CA2207: Initialize value type static fields inline
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2207
+dotnet_diagnostic.ca2207.severity = warning
+
+# CA2208: Instantiate argument exceptions correctly
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2208
+# TODO: re-enable
+# dotnet_diagnostic.CA2208.severity = warning
+
+# CA2211: Non-constant fields should not be visible
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2211
+dotnet_diagnostic.ca2211.severity = warning
+
+# CA2213: Disposable fields should be disposed
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2213
+dotnet_diagnostic.ca2213.severity = warning
+# KILL ??
+dotnet_code_quality.interprocedural_analysis_kind = ContextSensitive
+dotnet_code_quality.max_interprocedural_method_call_chain = 5
+dotnet_code_quality.max_interprocedural_lambda_or_local_function_call_chain = 5
+
+# CA2214: Do not call overridable methods in constructors
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2214
+dotnet_diagnostic.ca2214.severity = warning
+
+# CA2215: Dispose methods should call base class dispose
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2215
+dotnet_diagnostic.ca2215.severity = warning
+
+# CA2216: Disposable types should declare finalizer
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2216
+dotnet_diagnostic.ca2216.severity = warning
+
+# CA2217: Do not mark enums with FlagsAttribute
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2217
+dotnet_diagnostic.ca2217.severity = warning
+
+# CA2218: Override GetHashCode on overriding Equals
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2218
+dotnet_diagnostic.ca2218.severity = warning
+
+# CA2219: Do not raise exceptions in exception clauses
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2219
+dotnet_diagnostic.ca2219.severity = warning
+
+# CA2224: Override equals on overloading operator equals
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2224
+dotnet_diagnostic.ca2224.severity = warning
+
+# CA2225: Operator overloads have named alternates
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2225
+dotnet_diagnostic.ca2225.severity = warning
+
+# CA2226: Operators should have symmetrical overloads
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2226
+dotnet_diagnostic.ca2226.severity = warning
+
+# CA2227: Collection properties should be read only
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2227
+dotnet_diagnostic.ca2227.severity = suggestion
+
+# CA2229: Implement serialization constructors
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2229
+dotnet_diagnostic.ca2229.severity = warning
+
+# CA2231: Overload operator equals on overriding ValueType.Equals
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2231
+dotnet_diagnostic.ca2231.severity = warning
+
+# CA2234: Pass System.Uri objects instead of strings
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2234
+dotnet_diagnostic.ca2234.severity = warning
+
+# CA2235: Mark all non-serializable fields
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2235
+dotnet_diagnostic.ca2235.severity = warning
+
+# CA2237: Mark ISerializable types with SerializableAttribute
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2237
+dotnet_diagnostic.ca2237.severity = warning
+
+# CA2241: Provide correct arguments to formatting methods
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2241
+dotnet_diagnostic.ca2241.severity = warning
+
+# CA2242: Test for NaN correctly
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2242
+dotnet_diagnostic.ca2242.severity = warning
+
+# CA2243: Attribute string literals should parse correctly
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2243
+dotnet_diagnostic.ca2243.severity = warning
+
+# CA2244: Do not duplicate indexed element initializations
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2244
+dotnet_diagnostic.ca2244.severity = warning
+
+# CA2245: Do not assign a property to itself
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2245
+dotnet_diagnostic.ca2245.severity = warning
+
+# CA2246: Do not assign a symbol and its member in the same statement
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2246
+dotnet_diagnostic.ca2246.severity = warning
+
+# CA2247: Argument passed to TaskCompletionSource constructor should be TaskCreationOptions enum instead of TaskContinuationOptions enum
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2247
+# https://devblogs.microsoft.com/dotnet/automatically-find-latent-bugs-in-your-code-with-net-5#argument-passed-to-taskcompletionsource-calls-the-wrong-constructor
+dotnet_diagnostic.ca2247.severity = warning
+
+# CA2248: Provide correct 'enum' argument to 'Enum.HasFlag'
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2248
+dotnet_diagnostic.ca2248.severity = warning
+
+# CA2249: Consider using String.Contains instead of String.IndexOf
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2249
+dotnet_diagnostic.ca2249.severity = warning
+
+# CA2250: Use ThrowIfCancellationRequested
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2250
+
+# CA2251: Use String.Equals over String.Compare
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2251
+dotnet_diagnostic.ca2251.severity = suggestion
+
+# CA2252: Opt in to preview features before using them  # TODO: comment this back out once compiler errors are no longer present. EnablePreviewFeatures in csproj should have fixed it
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca2252
+dotnet_diagnostic.ca2252.severity = suggestion
+
+# CA2253: Named placeholders in the logging message template should not be comprised of only numeric characters.
+# LoggerMessageDefineAnalyzer
+# https://github.com/dotnet/roslyn-analyzers/blob/main/src/NetAnalyzers/Microsoft.CodeAnalysis.NetAnalyzers.sarif#L3672
+# Duplicated by Structured Logging plugin for Rider, later can be increased to warning if desired
+dotnet_diagnostic.ca2253.severity = suggestion
+
+
+# CA2254: The logging message template should not vary between calls.
+# LoggerMessageDefineAnalyzer
+# https://github.com/dotnet/roslyn-analyzers/blob/main/src/NetAnalyzers/Microsoft.CodeAnalysis.NetAnalyzers.sarif#L3692
+# Duplicated by Structured Logging plugin for Rider, later can be increased to warning if desired
+dotnet_diagnostic.ca2254.severity = suggestion
+
+################################################################################
+# Compiler Warnings (CS[0-9]{4})
+# https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/
+################################################################################
+
+# CS0649 - Field 'field' is never assigned to, and will always have its default value 'value'
+# https://docs.microsoft.com/en-us/dotnet/csharp/misc/cs0649
+
+# CS8073: Warn when expression is always true or false
+# https://devblogs.microsoft.com/dotnet/automatically-find-latent-bugs-in-your-code-with-net-5#warn-when-expression-is-always-true-or-false
+# Default is warning
+dotnet_diagnostic.cs8073.severity = warning
+
+
+################################################################################
+# XML Documentation
+# Microsoft.Documentation
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/documentation-warnings
+# Completed on 2021 July 29
+################################################################################
+
+# CA1200: Avoid using cref tags with a prefix
+# https://docs.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca1200
+
+# CS1570: XML comment has badly formed XML
+#  
+
+# CS1573 - Parameter 'parameter' has no matching param tag in the XML comment for 'parameter' (but other parameters do)
+# https://docs.microsoft.com/en-us/dotnet/csharp/misc/cs1573
+dotnet_diagnostic.cs1573.severity = suggestion
+
+# CS1574 - XML comment on 'construct' has syntactically incorrect cref attribute 'name'
+# https://docs.microsoft.com/en-us/dotnet/csharp/misc/cs1574
+dotnet_diagnostic.cs1574.severity = suggestion
+
+# CS1591: Missing XML comment for publicly visible type or member 'Type_or_Member'
+# https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/cs1591
+dotnet_diagnostic.cs1591.severity = suggestion
+
+
+
+################################################################################
+# Threading / Async
+# https://github.com/Microsoft/vs-threading/blob/main/doc/cookbook_vs.md
+################################################################################
+
+################################################################################
+# TODO: THESE SHOULD BE SET TO ERROR !!
+################################################################################
+
+dotnet_diagnostic.vsthrd001.severity = error
+# VSTHRD002 - Avoid problematic synchronous waits
+# https://github.com/microsoft/vs-threading/blob/main/doc/analyzers/VSTHRD002.md
+dotnet_diagnostic.vsthrd002.severity = warning
+# VSTHRD003 - Avoid awaiting foreign Tasks
+# https://github.com/microsoft/vs-threading/blob/main/doc/analyzers/VSTHRD003.md
+# TODO
+dotnet_diagnostic.vsthrd003.severity = error
+dotnet_diagnostic.vsthrd004.severity = error
+dotnet_diagnostic.vsthrd010.severity = error
+dotnet_diagnostic.vsthrd011.severity = error
+dotnet_diagnostic.vsthrd012.severity = error
+# VSTHRD100	- Avoid async void methods	
+# https://github.com/microsoft/vs-threading/blob/main/doc/analyzers/VSTHRD100.md
+# TODO
+dotnet_diagnostic.vsthrd100.severity = warning
+# VSTHRD101 - Avoid unsupported async delegates	
+# https://github.com/microsoft/vs-threading/blob/main/doc/analyzers/VSTHRD101.md
+# TODO
+dotnet_diagnostic.vsthrd101.severity = warning
+dotnet_diagnostic.vsthrd102.severity = error
+dotnet_diagnostic.vsthrd103.severity = warning
+# VSTHRD104 - Expose an async version of this method that does not synchronously block
+dotnet_diagnostic.vsthrd104.severity = warning
+dotnet_diagnostic.vsthrd105.severity = error
+dotnet_diagnostic.vsthrd106.severity = error
+dotnet_diagnostic.vsthrd107.severity = error
+dotnet_diagnostic.vsthrd108.severity = error
+dotnet_diagnostic.vsthrd109.severity = error
+# VSTHRD110 - Observe the awaitable result of this method call by awaiting it, 
+#             assigning to a variable, or passing it to another method.
+# TODO
+dotnet_diagnostic.vsthrd110.severity = warning
+
+# VSTHRD111 - Use .ConfigureAwait(bool)
+# https://github.com/microsoft/vs-threading/blob/main/doc/analyzers/VSTHRD111.md
+dotnet_diagnostic.vsthrd111.severity = warning
+dotnet_diagnostic.vsthrd112.severity = error
+dotnet_diagnostic.vsthrd113.severity = error
+dotnet_diagnostic.vsthrd114.severity = error
+
+# VSTHRD200 - Use Async suffix for async methods
+# https://github.com/microsoft/vs-threading/blob/main/doc/analyzers/VSTHRD200.md
+dotnet_diagnostic.vsthrd200.severity = warning
+
+
+
+################################################################################
+# TODO: THESE SHOULD BE SET TO ERROR !!
+################################################################################
+
+# CS8602: Dereference of possible null reference
+# NO URL FOUND
+dotnet_diagnostic.cs8602.severity = warning
+# CS8603: possible null reference return
+dotnet_diagnostic.cs8603.severity = warning
+# CS8604: possible null reference argument
+dotnet_diagnostic.cs8604.severity = warning
+# CS8614: Nullability of reference types in type of parameter 'x' doesn't match implicitly implemented member 'y'
+dotnet_diagnostic.cs8614.severity = error
+# CS8625: Cannot convert null literal to non-nullable reference type.
+# https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-forgiving
+# BROKEN IN RIDER -- IT DOES NOT RECOGNIZE THIS -- Still broken as of 2021.2.2
+# Broken in Compiler -- compiler has a bug.
+# tracked here: 
+#     https://github.com/dotnet/roslyn/issues/43536
+# Closed in September 2021, I'd expect a fix in .Net 6
+dotnet_diagnostic.cs8625.severity = error
+
+
+################################################################################
+# ReSharper properties
+################################################################################
+# Index : https://www.jetbrains.com/help/resharper/EditorConfig_Index.html
+# Levels: https://www.jetbrains.com/help/rider/Code_Analysis__Code_Inspections.html#suggestions
+
+######################
+##    Code Style    ##
+######################
+# https://www.jetbrains.com/help/rider/Reference__Code_Inspections_CSHARP.html#CodeStyleIssues
+# resharper_blank_lines_inside_type = 2
+resharper_place_simple_initializer_on_single_line = true
+resharper_max_initializer_elements_on_line = 2
+resharper_constant_conditional_access_qualifier_highlighting = suggestion
+# https://www.jetbrains.com/help/rider/EditorConfig_CSHARP_CSharpIndentStylePageSchema.html#resharper_csharp_outdent_binary_ops
+resharper_csharp_outdent_binary_ops = true
+
+
+# https://www.jetbrains.com/help/rider/Using_var_Keyword_in_Declarations.html#use-var-when-evident-details
+# https://www.jetbrains.com/help/rider/SuggestVarOrType_Elsewhere.html
+resharper_suggest_var_or_type_elsewhere_highlighting = none
+
+resharper_convert_to_using_declaration_highlighting = hint
+
+resharper_invoke_as_extension_method_highlighting = none
+
+# https://www.jetbrains.com/help/rider/EditorConfig_CSHARP_LineBreaksPageSchema.html#Arrangement_of_attributes
+resharper_csharp_max_attribute_length_for_same_line = 120
+resharper_csharp_place_accessorholder_attribute_on_same_line = if_owner_is_single_line
+
+######################
+##       XAML       ##
+######################
+# https://www.jetbrains.com/help/resharper/Reference__Code_Inspections_XAML.html
+resharper_xaml_avalonia_wrong_binding_mode_for_stream_binding_operator_highlighting = warning
+
+######################
+## Code Inspections ##
+######################
+# https://www.jetbrains.com/help/rider/SwitchStatementMissingSomeEnumCasesNoDefault.html
+resharper_switch_statement_missing_some_enum_cases_no_default_highlighting = suggestion
+
+################################################################################
+# Generated Code - Prevent analyzers from running in these directories
+################################################################################
+
+[src/DataSource/Migrations/**.cs]
+generated_code = true
